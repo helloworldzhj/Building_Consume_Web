@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}DDC详情页{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+    <table class="table table-bordered">
+        <tr align="center">
+            <td>DDC_ID</td>
+            <td>地址</td>
+            <td>表号</td>
+{#            <td>数量</td>#}
+            <td>表类型</td>
+            <td>管理</td>
+        </tr>
+
+        {% for data1 in alldata1 %}
+            <tr align="center">
+                <td>{{ data1.DDC_ID }}</td>
+                <td>{{ data1.address }}</td>
+                <td>{{ data1.biaohao }}</td>
+{#                <td>{{ data1.number }}</td>#}
+                <td>{{ data1.type }}</td>
+                <td>
+                    <a href="{{url_for('delete',data_id_1=data1.id)}}">删除</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+<script>
+    function delete_key(r){
+        alert("delete Successfully");
+        form=document.getElementById("operation");
+        form.action="deleteKeyWords/"+r;
+        form.method="post";
+        form.submit();
+    }
+</script>
+
+{% endblock %}

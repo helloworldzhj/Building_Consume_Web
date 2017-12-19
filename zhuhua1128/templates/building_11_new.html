@@ -1,0 +1,185 @@
+{% extends 'base2.html' %}
+
+{% block title %}11号楼{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/building_11.css') }}">
+{% endblock %}
+
+{% block main %}
+    <table border="0" width="1200" align="center">
+        <!--border代表边框的粗细，0代表无边框，数字越大，边框越粗-->
+        <!--width设置表格的宽度：绝对值（800.1000.2000）相对值（表格宽度相对于屏幕的宽度）（10%。20%。50%）-->
+        <tr align="center">
+            <td width="32%" rowspan="3">
+
+
+
+                <div class="machine_switch">
+{#一楼灯#}
+                    {% if data_state_1=='1' %}
+                        <img style="position:absolute; top:312px; left:560px; z-index:2" src="{{ url_for('static',filename='images/lamp_on.png') }}"/>
+                    {% else %}
+                        <img style="position:absolute; top:312px; left:560px; z-index:2" src="{{ url_for('static',filename='images/lamp_off.png') }}"/>
+                    {% endif %}
+
+
+    {#二楼灯#}
+                    {% if data_state_2=='1' %}
+                        <img style="position:absolute; top:508px; left:560px; z-index:2" src="{{ url_for('static',filename='images/lamp_on.png') }}"/>
+                    {% else %}
+                        <img style="position:absolute; top:508px; left:560px; z-index:2" src="{{ url_for('static',filename='images/lamp_off.png') }}"/>
+                    {% endif %}
+
+    {#一楼风扇#}
+                    {% if data_state_3=='1' %}
+                        <img style="position:absolute; top:312px; left:390px; z-index:2" src="{{ url_for('static',filename='images/fan_on.png') }}"/>
+                    {% else %}
+                        <img style="position:absolute; top:312px; left:390px; z-index:2" src="{{ url_for('static',filename='images/fan_off.png') }}"/>
+                    {% endif %}
+
+    {#二楼风扇#}
+                    {% if data_state_4=='1' %}
+                        <img style="position:absolute; top:507px; left:390px; z-index:2" src="{{ url_for('static',filename='images/fan_on.png') }}"/>
+                    {% else %}
+                        <img style="position:absolute; top:507px; left:390px; z-index:2" src="{{ url_for('static',filename='images/fan_off.png') }}"/>
+                    {% endif %}
+
+
+
+
+                    <img style="position:absolute; top:192px; left:315px; z-index:1;" src="{{ url_for('static',filename='images/building2.png') }}" alt="大楼图">
+                </div>
+
+
+
+{#                <img src="{{ url_for('static',filename='images/building2.png') }}"  width="400" height="700" border="0" alt="大楼图" />#}
+            </td>
+            <td>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </td>
+            <td>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </td>
+        </tr>
+        <tr>
+
+            <td>
+                {% if user %}
+                  {% if user.level=='1' %}
+                      <form action="{{ url_for('search_want') }}" method="POST">
+                            <div class="form-container">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="DDC_ID" name="ddcid">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="表号" name="biaohao">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">抄表</button>
+                                </div>
+                            </div>
+                        </form>
+                  {% else %}
+                      <form action="{{ url_for('search_want') }}" method="POST">
+                            <div class="form-container">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="DDC_ID" name="ddcid">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="表号" name="biaohao">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block">抄表</button>
+                                </div>
+                            </div>
+                        </form>
+                  {% endif %}
+                {% else %}
+                      <p> </p>
+                {% endif %}
+            </td>
+            <td>
+                {% if user %}
+                  {% if user.level=='1' %}
+                      <form action="{{ url_for('search_all') }}" method="post">
+                    <div class="form-group">
+                        <button class="btn btn-primary">抄所有表</button>
+                    </div>
+                </form>
+                  {% else %}
+                      <form action="{{ url_for('search_all') }}" method="post">
+                    <div class="form-group">
+                        <button class="btn btn-primary">抄所有表</button>
+                    </div>
+                </form>
+                  {% endif %}
+                {% else %}
+                      <p> </p>
+                {% endif %}
+            </td>
+
+
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <div id="ajax124" style="width:700px">
+                    <table class="table table-bordered table-striped">
+                        <!--border="1" width="50%" align="center"-->
+            <!--border代表边框的粗细，0代表无边框，数字越大，边框越粗-->
+            <!--width设置表格的宽度：绝对值（800.1000.2000）相对值（表格宽度相对于屏幕的宽度）（10%。20%。50%）-->
+                        <tr align="center">
+                                <td>DDC_ID</td>
+                                <td>表号</td>
+                                <td>电表数值</td>
+                                <td>耗电量</td>
+                                <td>截止时间</td>
+                        </tr>
+                        {% for data in alldata %}
+                            <tr align="center">
+                                <td>{{ data.DDC_ID }}</td>
+                                <td>{{ data.biaohao }}</td>
+                                <td>{{ data.data }}</td>
+                                <td>{{ data.consumption }}</td>
+                                <td>{{ data.endtime }}</td>
+                            </tr>
+                        {% endfor %}
+
+                    <script>
+                        setInterval(function() {
+                            $("#ajax124").load(location.href+" #ajax124>*","");
+                            }, 1000);
+                    </script>
+
+                    </table>
+
+
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+
+
+
+
+
+
+
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base2.html' %}
+
+{% block title %}概览{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/base.css') }}">
+{% endblock %}
+
+{% block main %}
+    <div class="main" style="width:1190px;margin:0 auto;height:auto;">
+        <img src="{{ url_for('static',filename='images/building1.png') }}" width="1170px" height="650px" border="0" usemap="#planetmap" alt="大楼图" />
+        <!--width="1500px" height="800px" -->
+        <map name="planetmap" id="planetmap">
+            <area shape="rect" coords="100,110,370,400" href ="{{ url_for('building_11') }}" alt="大楼1" />
+            <area shape="rect" coords="830,180,430,400" href ="#" alt="大楼2" />
+            <area shape="rect" coords="820,380,1200,195" href ="#" alt="大楼3" />
+        </map>
+    </div>
+
+{% endblock %}
+
+

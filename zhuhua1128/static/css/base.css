@@ -1,0 +1,38 @@
+.logo{
+    width :220px;
+    height:45px;
+}
+
+body{
+    background: #f3f3f3;
+}
+
+.list1{
+    background-color: #68c3f5;
+    font-size: 15px;
+}
+
+
+.main{
+    background: #fff;
+    width:730px;
+    margin:0 auto;
+    /*让它居中*/
+    overflow: hidden;
+    /*让它做一个浮动，再去菜鸟搜索一下确认一下*/
+    padding:10px;
+    /*上下都有一点内边距，登陆和框架的顶端，确认按钮和框架的下面。*/
+}
+
+
+
+ul li{margin:0 5px;}
+
+
+
+
+
+
+
+
+
